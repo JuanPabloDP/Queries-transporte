@@ -12,3 +12,4 @@ editor: visual
 
 # Actividad: Queries sobre transporte
 
+1.- ¿Cuál es la probabilidad de que una mujer joven de estrato social alto use la bicicleta?
