@@ -13,3 +13,4 @@ editor: visual
 # Actividad: Queries sobre transporte
 
 1.- ¿Cuál es la probabilidad de que una mujer joven de estrato social alto use la bicicleta?
+2.- ¿Cuál es la probabilidad de que una persona que vive en una localidad de menos de 2,500 habitantes sea de estrato alto?
