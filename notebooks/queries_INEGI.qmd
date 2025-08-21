@@ -1,0 +1,14 @@
+---
+title: "queries_INEGI"
+format:
+   html:
+     toc: true
+     html-math-method: katex
+     embed-resources: true
+     self-contained-math: true
+     df-print: kable
+editor: visual
+---
+
+# Actividad: Queries sobre transporte
+
