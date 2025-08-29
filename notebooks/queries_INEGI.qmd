@@ -11,6 +11,225 @@ editor: visual
 ---
 
 # Actividad: Queries sobre transporte
+## Preguntas a responder
+1.- ¿Cuál es la probabilidad de que una persona mayor de 18 años use como medio de transporte el tren? 
+2.- ¿Cuál es la probabilidad de que se utilice transporte privado en un día entre semana en comparación con el fin de semana? 
+3.- ¿Cuál es la probabilidad de que un hombre adulto use el automóvil por motivos de trabajo? 
+4.-¿Quién es más probable que haga más de 1hr 30 min de su casa al trabajo, una persona de estatus sociodemográfico bajo o una persona de estatus sociodemográfico alto?
 
-1.- ¿Cuál es la probabilidad de que una mujer joven de estrato social alto use la bicicleta?
-2.- ¿Cuál es la probabilidad de que una persona que vive en una localidad de menos de 2,500 habitantes sea de estrato alto?
+```{r}
+library(bnlearn)
+ttransporte <- read.csv("C:\\Users\\brapi\\OneDrive\\Documents\\Análisis_metodos_razonamiento\\Queries-transporte\\data\\conjunto_de_datos\\ttransporte.csv")
+head(ttransporte)
+```
+Tomando en cuenta las preguntas a responder, se determinó que las variables ideóneas eran: 
+```{r}
+vars_clave <- c("edad", "sexo", "estrato", "tloc", 
+                "p5_3", "p5_14", "p5_16_1_1", "p5_16_1_2")
+
+ttransporte_clave <- ttransporte[ , vars_clave]
+
+head(ttransporte_clave)
+
+```
+
+
+```{r}
+ttransporte_discreto <- ttransporte_clave
+
+# Edad
+if ("edad" %in% names(ttransporte_discreto)) {
+  edad_num <- as.numeric(ttransporte_discreto$edad)
+  ttransporte_discreto$edad <- ifelse(edad_num >= 18, "Adulto", "Menor")
+  ttransporte_discreto$edad <- as.factor(ttransporte_discreto$edad)
+}
+
+# Sexo
+if ("sexo" %in% names(ttransporte_discreto)) {
+  ttransporte_discreto$sexo <- as.factor(ttransporte_discreto$sexo)
+}
+
+# Estrato
+if ("estrato" %in% names(ttransporte_discreto)) {
+  estrato_num <- as.numeric(ttransporte_discreto$estrato)
+  ttransporte_discreto$estrato <- ifelse(estrato_num <= 2, "Bajo", "Alto")
+  ttransporte_discreto$estrato <- as.factor(ttransporte_discreto$estrato)
+}
+
+# Tloc
+if ("tloc" %in% names(ttransporte_discreto)) {
+  ttransporte_discreto$tloc <- as.factor(ttransporte_discreto$tloc)
+}
+
+# Día
+if ("p5_3" %in% names(ttransporte_discreto)) {
+  ttransporte_discreto$p5_3 <- as.factor(ttransporte_discreto$p5_3)
+}
+
+# Transporte
+if ("p5_14" %in% names(ttransporte_discreto)) {
+  ttransporte_discreto$p5_14 <- as.factor(ttransporte_discreto$p5_14)
+}
+
+# TIEMPO: Combinar horas y minutos en una sola variable
+if ("p5_16_1_1" %in% names(ttransporte_discreto) && "p5_16_1_2" %in% names(ttransporte_discreto)) {
+  horas <- as.numeric(ttransporte_discreto$p5_16_1_1)
+  minutos <- as.numeric(ttransporte_discreto$p5_16_1_2)
+  
+  # Reemplazar códigos 99 (no sabe) con NA
+  horas[horas == 99] <- NA
+  minutos[minutos == 99] <- NA
+  
+  # Calcular tiempo total en minutos
+  tiempo_total <- horas * 60 + minutos
+  
+  # Crear nueva variable de tiempo discretizada
+  ttransporte_discreto$tiempo_viaje <- ifelse(tiempo_total > 90, "Largo", "Corto")
+  ttransporte_discreto$tiempo_viaje <- as.factor(ttransporte_discreto$tiempo_viaje)
+  
+  # Eliminar las variables originales de horas y minutos
+  ttransporte_discreto <- ttransporte_discreto[, !names(ttransporte_discreto) %in% c("p5_16_1_1", "p5_16_1_2")]
+}
+
+# Limpiar NAs
+ttransporte_discreto <- na.omit(ttransporte_discreto)
+
+# Limpiar niveles vacíos
+ttransporte_discreto[] <- lapply(ttransporte_discreto, function(x) {
+  if(is.factor(x)) {
+    droplevels(x)
+  } else {
+    x
+  }
+})
+```
+
+
+# DAG 1 (Sentido común)
+```{r}
+
+dag_1 <- empty.graph(nodes = c("sexo", "edad", "estrato", "tloc", "p5_3", "p5_14", "tiempo_viaje"))
+
+arc_set_1 <- matrix(c("sexo", "estrato",        
+                      "edad", "estrato",        
+                      "estrato", "tloc",        
+                      "tloc", "p5_14",
+                      "estrato", "p5_14",
+                      "edad", "p5_14",
+                      "p5_3", "p5_14",
+                      "p5_14", "tiempo_viaje",
+                      "tloc", "tiempo_viaje"),
+                      byrow = TRUE, ncol = 2,
+                      dimnames = list(NULL, c("from", "to")))
+
+arcs(dag_1) = arc_set_1
+graphviz.plot(dag_1, shape = "ellipse", main = "DAG 1: Sentido Común")
+```
+
+```{r}
+score(dag_1, data = ttransporte_discreto, type = "bic")
+```
+
+```{r}
+arc.strength(dag_1, data = ttransporte_discreto, criterion = "mi")
+```
+
+# DAG 2 centrada en demografía
+```{r}
+dag_2 <- empty.graph(nodes = c("sexo", "edad", "estrato", "tloc", "p5_3", "p5_14", "tiempo_viaje"))
+
+arc_set_2 <- matrix(c("edad", "estrato",
+                      "sexo", "estrato",
+                      "edad", "tloc",
+                      "estrato", "p5_3",
+                      "tloc", "p5_3",
+                      "p5_3", "p5_14",
+                      "estrato", "p5_14",
+                      "p5_14", "tiempo_viaje",
+                      "estrato", "tiempo_viaje"),
+                    byrow = TRUE, ncol = 2,
+                    dimnames = list(NULL, c("from", "to")))
+
+arcs(dag_2) <- arc_set_2
+graphviz.plot(dag_2, shape = "ellipse", main = "DAG 2: Centrada en Demografía")
+
+```
+
+```{r}
+score(dag_2, data = ttransporte_discreto, type = "bic")
+```
+
+```{r}
+arc.strength(dag_2, data = ttransporte_discreto, criterion = "mi")
+```
+# DAG 3 centrada en el transporte
+```{r}
+dag_3 <- empty.graph(nodes = c("sexo", "edad", "estrato", "tloc", "p5_3", "p5_14", "tiempo_viaje"))
+
+arc_set_3 <- matrix(c("tloc", "estrato",
+                      "edad", "p5_3",
+                      "estrato", "p5_3",
+                      "tloc", "p5_14",
+                      "p5_3", "p5_14",
+                      "sexo", "p5_14",
+                      "p5_14", "tiempo_viaje",
+                      "estrato", "tiempo_viaje"),
+                    byrow = TRUE, ncol = 2,
+                    dimnames = list(NULL, c("from", "to")))
+
+arcs(dag_3) <- arc_set_3
+graphviz.plot(dag_3, shape = "ellipse", main = "DAG 3: Centrada en Transporte")
+```
+
+```{r}
+score(dag_3, data = ttransporte_discreto, type = "bic")
+```
+
+```{r}
+arc.strength(dag_1, data = ttransporte_discreto, criterion = "mi")
+```
+# Mejor DAG con hill climbing
+
+```{r}
+best_dag <- hc(ttransporte_discreto)
+graphviz.plot(best_dag, shape = "ellipse")
+```
+```{r}
+score(best_dag, data = ttransporte_discreto, type = "bic")
+```
+
+```{r}
+arc.strength(best_dag, data = ttransporte_discreto, criterion = "mi")
+```
+
+```{r}
+sapply(ttransporte_discreto, function(x) if(is.factor(x)) levels(x) else unique(x))
+```
+
+```{r}
+bn_best_dag = bn.fit(best_dag, data = ttransporte_discreto)
+```
+
+```{r}
+# 1.- ¿Probabilidad de que persona >18 años use tren?
+# (Tren ligero=12, Tren suburbano=13, Metro=5)
+cpquery(bn_best_dag, event = ((p5_14 == "5") | (p5_14 == "12") | (p5_14 == "13")), evidence = (edad == "Adulto"), n = 10^6)
+
+#2.- ¿Probabilidad transporte privado semana vs fin de semana?
+# Semana (código 1)
+cpquery(bn_best_dag, event = ((p5_14 == "1") | (p5_14 == "9")), evidence = (p5_3 == "1"), n = 10^6)
+# Fin de semana (código 2) 
+cpquery(bn_best_dag, event = ((p5_14 == "1") | (p5_14 == "9")), evidence = (p5_3 == "2"), n = 10^6)
+
+# 3.-¿Probabilidad hombre adulto use automóvil?
+# (Solo automóvil=1, hombre=1, adulto)
+cpquery(bn_best_dag, event = (p5_14 == "1"), evidence = ((sexo == "1") & (edad == "Adulto")), n = 10^6)
+
+#4.- ¿Quién hace más de 90min, estrato bajo vs alto?
+# Estrato bajo
+cpquery(bn_best_dag, event = (tiempo_viaje == "Largo"), evidence = (estrato == "Bajo"), n = 10^6)
+# Estrato alto  
+cpquery(bn_best_dag, event = (tiempo_viaje == "Largo"), evidence = (estrato == "Alto"), n = 10^6)
+```
+
+
