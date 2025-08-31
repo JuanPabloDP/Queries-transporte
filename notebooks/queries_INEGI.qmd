@@ -245,17 +245,17 @@ cpquery(bn_best_dag, event = ((p5_14 == "1") | (p5_14 == "9") | (p5_14 == "7")),
 ```
 
 ```{r}
-# 3.-¿Probabilidad hombre adulto use automóvil?
+# 3.-¿Probabilidad hombre adulto use automóvil por motivos del trabajo?
 # (Solo automóvil=1, hombre=1, adulto)
-cpquery(bn_best_dag, event = (p5_14 == "1"), evidence = ((sexo == "1") & (edad == "Adulto")), n = 10^6)
+cpquery(bn_best_dag, event = (p5_14 == "1"), evidence = ((sexo == "1") & (edad == "Adulto")& (p5_13 == "2")), n = 10^6)
 ```
 
 ```{r}
-#4.- ¿Quién hace más de 90min, estrato bajo vs alto?
+#4.- ¿Quién hace más de 90min de su casa al trabajo, estrato bajo vs alto?
 # Estrato bajo
-cpquery(bn_best_dag, event = (tiempo_viaje == "Largo"), evidence = (estrato == "Bajo"), n = 10^6)
+cpquery(bn_best_dag, event = (tiempo_viaje == "Largo"), evidence = (estrato == "Bajo" & p5_13 == "1" & p5_6 == "1"), n = 10^6)
 # Estrato alto  
-cpquery(bn_best_dag, event = (tiempo_viaje == "Largo"), evidence = (estrato == "Alto"), n = 10^6)
+cpquery(bn_best_dag, event = (tiempo_viaje == "Largo"), evidence = (estrato == "Alto" & p5_13 == "1" & p5_6 == "1"), n = 10^6)
 ```
 
 # Likelihood weighting
@@ -281,7 +281,7 @@ cpquery(bn_best_dag, event = (p5_14 == "1"), evidence = list(sexo = "1", edad = 
 ```
 
 ```{r}
-#4.- ¿Quién hace más de 90min, estrato bajo vs alto?
+#4.- ¿Quién hace más de 90min para llegar de su casa al trabajo, estrato bajo vs alto?
 # Estrato bajo
 cpquery(bn_best_dag, event = (tiempo_viaje == "Largo"), evidence = list(estrato = "Bajo"), method = "lw")
 # Estrato alto  
