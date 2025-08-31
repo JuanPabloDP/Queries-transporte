@@ -13,8 +13,6 @@ editor: visual
 # Actividad: Queries sobre transporte
 
 ## Preguntas a responder
-
-# Alan (Análisis social  y de transporte)
 1.- ¿Cuál es la probabilidad de que una persona mayor de 18 años use como medio de transporte el tren? 2.- ¿Cuál es la probabilidad de que se utilice transporte privado en un día entre semana en comparación con el fin de semana? 3.- ¿Cuál es la probabilidad de que un hombre adulto use el automóvil por motivos de trabajo? 4.-¿Quién es más probable que haga más de 1hr 30 min de su casa al trabajo, una persona de estatus sociodemográfico bajo o una persona de estatus sociodemográfico alto?
 
 ```{r}

@@ -25,27 +25,76 @@ Sarah Camila Guzmán Fierro
 \maketitle
 
 \begin{abstract}
-La movilidad en la Zona Metropolitana del Valle de México (ZMVM) es un fenómeno condicionado por factores demográficos, socioeconómicos y de infraestructura. En este estudio utilizamos datos de la \textit{Encuesta Origen Destino en Hogares} (EOD 2017) para responder consultas probabilísticas relacionadas con el uso de transporte. Se construyeron redes bayesianas a partir de variables como edad, sexo, estrato socioeconómico, medio de transporte, día de viaje y duración de trayecto. Se propusieron tres estructuras iniciales de grafos dirigidos acíclicos (DAGs), y posteriormente se aplicó el algoritmo \textit{hill-climbing} para identificar la estructura con mejor ajuste bajo el criterio BIC. Los resultados muestran que los adultos presentan mayor probabilidad de utilizar transporte ferroviario; el uso de transporte privado es más común en días hábiles que en fines de semana; los hombres adultos son más propensos a usar automóvil por motivos de trabajo; y los individuos de estrato bajo tienen mayor probabilidad de realizar viajes de más de 90 minutos. Estos hallazgos reflejan desigualdades en la movilidad urbana y proporcionan evidencia útil para el diseño de políticas públicas orientadas a mejorar el acceso y la eficiencia del transporte en la ZMVM.
+En este estudio utilizamos datos de la \textit{Encuesta Origen Destino en Hogares} (EOD 2017), de la Zona Metropolitana del Valle de México (ZMVM), para responder consultas probabilísticas relacionadas con el uso de transporte. Se construyeron redes bayesianas a partir de variables, se propusieron tres estructuras iniciales de grafos dirigidos acíclicos (DAGs), y posteriormente se aplicó el algoritmo \textit{hill-climbing} para identificar la estructura con mejor ajuste. Los resultados muestran que los adultos presentan mayor probabilidad de utilizar transporte ferroviario; el uso de transporte privado es más común en días hábiles que en fines de semana; los hombres adultos son más propensos a usar automóvil por motivos de trabajo; y los individuos de estrato bajo tienen mayor probabilidad de realizar viajes de más de 90 minutos. 
 \end{abstract}
 
 \section{Introducción}
-La movilidad urbana en la Zona Metropolitana del Valle de México (ZMVM) es un fenómeno complejo que involucra factores demográficos, socioeconómicos y de infraestructura. Para comprender mejor los patrones de transporte, el INEGI realizó en 2017 la \textit{Encuesta Origen Destino en Hogares}, cuyo objetivo fue obtener información que permita conocer la movilidad actual de los habitantes de la ZMVM, respecto a sus características, motivo, duración, medios de transporte y horario de desplazamientos, entre otros aspectos de los viajes que realizan.
+La movilidad urbana en la Zona Metropolitana del Valle de México (ZMVM) es un fenómeno complejo que involucra factores demográficos, socioeconómicos y de infraestructura. Para comprender mejor los patrones de transporte, el INEGI realizó en 2017 la \textit{Encuesta Origen Destino en Hogares}, cuyo objetivo fue obtener información que permita conocer la movilidad actual de los habitantes de la ZMVM.
 
 En este trabajo utilizamos una aproximación basada en \textbf{redes bayesianas} para modelar las dependencias probabilísticas entre variables de interés, y responder consultas que permiten evaluar probabilidades condicionales asociadas al uso de transporte público o privado, duración de viajes y su relación con estrato socioeconómico, edad y sexo.
 
 \section{Metodología}
 
 \begin{enumerate}
-    \item \textbf{Selección y preparación de variables}: Se identificaron variables relevantes de la EOD 2017, entre ellas: edad, sexo, estrato socioeconómico, día de la semana, medio de transporte, tiempo de viaje y localidad de origen. Variables continuas como edad y tiempo de viaje fueron discretizadas en categorías (\textit{Adulto/Menor} y \textit{Corto/Largo}).
+    \item \textbf{Selección y preparación de variables}: Se identificaron variables relevantes, entre ellas: edad, sexo, estrato socioeconómico, día de la semana, medio de transporte, tiempo de viaje y localidad de origen. Variables continuas como edad y tiempo de viaje fueron discretizadas en categorías (\textit{Adulto/Menor} y \textit{Corto/Largo}).
     
-    \item \textbf{Construcción de DAGs}: Se propusieron tres grafos dirigidos acíclicos (DAGs) con diferentes enfoques:
+    \item \textbf{Construcción de DAGs}: Se propusieron tres grafos dirigidos acíclicos (DAGs) con diferentes enfoques, a su vez se calculó su \textit{Criterio de información bayesiano (BIC)}:
     \begin{itemize}
-        \item \textbf{DAG 1}: basado en sentido común (demografía $\rightarrow$ estrato $\rightarrow$ transporte $\rightarrow$ tiempo de viaje).
-        \item \textbf{DAG 2}: centrado en demografía (edad y sexo influyen en estrato y transporte).
-        \item \textbf{DAG 3}: centrado en transporte (transporte como nodo central entre demografía y tiempos de viaje).
+        \item \textbf{DAG 1}: basada en sentido común. 
+            \begin{figure}[htbp]
+                \centering
+                \includegraphics[width=0.8\columnwidth]{figures/DAG1_sentido_comun.pdf}
+                \caption{DAG 1: Sentido Común}
+                \label{fig:dag1}
+            \end{figure}
+            
+            $BIC_1=-4041940$
+        \item \textbf{DAG 2}: centrada en demografía. 
+            \begin{figure}[htbp]
+                \centering
+                \includegraphics[width=0.8\columnwidth]{figures/DAG2_demografia.pdf}
+                \caption{DAG 2: Demografía}
+                \label{fig:dag2}
+            \end{figure}
+            
+            $BIC_2=-4093969$
+        \item \textbf{DAG 3}: centrada en transporte. 
+            \begin{figure}[htbp]
+                \centering
+                \includegraphics[width=0.8\columnwidth]{figures/DAG3_transporte.pdf}
+                \caption{DAG 3: Transporte}
+                \label{fig:dag3}
+            \end{figure}
+            
+            $BIC_3=-4057150$
     \end{itemize}
+    De acuerdo con la métrica $BIC$, la estructura que mejor se ajusta a los datos fue DAG 1, basado en sentido común; seguido por DAG 3, centrada en transporte, y por último, DAG 2, centrada en demografía. Siendo $BIC_1>BIC_3>BIC_2$. 
     
-    \item Etc, como seleccion de mejor dag y consultas (queries)
+    \item \textbf{DAG óptima}: A través de \textit{Hill-climbing}, algoritmo que maximizan un score dado, se encontró la configuración que mejor se adapta a la estructura de los datos.
+        \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.8\columnwidth]{figures/DAG_best.pdf}
+            \caption{Mejor DAG obtenido por Hill Climbing}
+            \label{fig:dag_best}
+        \end{figure}
+
+        $BIC_Z=-4028409$
+        
+        Efectivamente esta DAG óptima cuenta con un mayor valor en la métrica $BIC$, contra la mejor propuesta anteriormente. Bajo esta estructura se establece la variable \textit{sexo} como único nodo independiente. Esto brinda información relevante sobre la alta dependencia de las demás variables sobre dicha variable. 
+
+        Así mismo se investigó cada relación de dependencia de la DAG óptima, por medio de una Prueba de independencia (condicional). 
+        
+        \input{figures/fuerza_arcos.tex}
+        
+        Se registró la información dentro de una tabla, parece haber relaciones muy débiles, puesto que son cercanas a cero; en la tabla registradas como cero. En el siguiente gráfico se logra apreciar de mejor manera la relación de dependencia predominante. Muestra que \textit{estrato} tiene una alta dependencia de \textit{sexo}, en comparación a otras dependencias. 
+        
+        \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.8\columnwidth]{figures/heatmap_informacion_mutua.pdf}
+            \caption{Heatmap de Información Mutua entre nodos de la red bayesiana}
+            \label{fig:heatmap_mi}
+        \end{figure}
+    
 \end{enumerate}
 
 \section{Aplicación}
@@ -84,48 +133,10 @@ RESULTADOOOOOOOOOS
 
 
 \section{Conclusiones}
+
+Estos hallazgos reflejan desigualdades en la movilidad urbana y proporcionan evidencia útil para el diseño de políticas públicas orientadas a mejorar el acceso y la eficiencia del transporte en la ZMVM.
+
 BORRAR Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad.
-
-\input{figures/fuerza_arcos.tex}
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.8\columnwidth]{figures/DAG1_sentido_comun.pdf}
-    \caption{DAG 1: Sentido Común}
-    \label{fig:dag1}
-\end{figure}
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.8\columnwidth]{figures/DAG2_demografia.pdf}
-    \caption{DAG 2: Centrada en Demografía}
-    \label{fig:dag2}
-\end{figure}
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.8\columnwidth]{figures/DAG3_transporte.pdf}
-    \caption{DAG 3: Centrada en Transporte}
-    \label{fig:dag3}
-\end{figure}
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.8\columnwidth]{figures/DAG_best.pdf}
-    \caption{Mejor DAG obtenido por Hill Climbing}
-    \label{fig:dag_best}
-\end{figure}
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.8\columnwidth]{figures/heatmap_informacion_mutua.pdf}
-    \caption{Heatmap de Información Mutua entre nodos de la red bayesiana}
-    \label{fig:heatmap_mi}
-\end{figure}
-
-
-
-
 
 \section{Referencias}
 \begin{thebibliography}{9}
