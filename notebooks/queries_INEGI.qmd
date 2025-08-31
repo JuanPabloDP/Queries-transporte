@@ -29,7 +29,7 @@ Tomando en cuenta las preguntas a responder, se determinó que las variables ide
 
 ```{r}
 vars_clave <- c("edad", "sexo", "estrato", "tloc", 
-                "p5_3", "p5_14", "p5_16_1_1", "p5_16_1_2")
+                "p5_3", "p5_14", "p5_16_1_1", "p5_16_1_2", "p5_13", "p5_6")
 
 ttransporte_clave <- ttransporte[ , vars_clave]
 
@@ -72,6 +72,16 @@ if ("p5_3" %in% names(ttransporte_discreto)) {
 # Transporte
 if ("p5_14" %in% names(ttransporte_discreto)) {
   ttransporte_discreto$p5_14 <- as.factor(ttransporte_discreto$p5_14)
+}
+
+# Motivo de viaje
+if ("p5_13" %in% names(ttransporte_discreto)) {
+  ttransporte_discreto$p5_13 <- as.factor(ttransporte_discreto$p5_13)
+}
+
+# Origen
+if ("p5_6" %in% names(ttransporte_discreto)) {
+  ttransporte_discreto$p5_6 <- as.factor(ttransporte_discreto$p5_6)
 }
 
 # TIEMPO: Combinar horas y minutos en una sola variable
