@@ -1,0 +1,102 @@
+% RECOMIENDO TRABAJAR EN OVERLEAF Y PEGAR AQUI
+
+\documentclass[twocolumn]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{url}
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{etoolbox}
+\patchcmd{\thebibliography}{\section*{\refname}}{}{}{}
+
+\title{Análisis de la Movilidad en la Zona Metropolitana del Valle de México con Redes Bayesianas}
+\author{
+Alan Fernando Bravo Pimentel \and
+Gonzalo Makenly Higuera Inzunza \and
+Juan Pablo de la Peña Gonzalez \and
+Sarah Camila Guzmán Fierro
+}
+\date{Agosto 2025}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+La movilidad en la Zona Metropolitana del Valle de México (ZMVM) es un fenómeno condicionado por factores demográficos, socioeconómicos y de infraestructura. En este estudio utilizamos datos de la \textit{Encuesta Origen Destino en Hogares} (EOD 2017) para responder consultas probabilísticas relacionadas con el uso de transporte. Se construyeron redes bayesianas a partir de variables como edad, sexo, estrato socioeconómico, medio de transporte, día de viaje y duración de trayecto. Se propusieron tres estructuras iniciales de grafos dirigidos acíclicos (DAGs), y posteriormente se aplicó el algoritmo \textit{hill-climbing} para identificar la estructura con mejor ajuste bajo el criterio BIC. Los resultados muestran que los adultos presentan mayor probabilidad de utilizar transporte ferroviario; el uso de transporte privado es más común en días hábiles que en fines de semana; los hombres adultos son más propensos a usar automóvil por motivos de trabajo; y los individuos de estrato bajo tienen mayor probabilidad de realizar viajes de más de 90 minutos. Estos hallazgos reflejan desigualdades en la movilidad urbana y proporcionan evidencia útil para el diseño de políticas públicas orientadas a mejorar el acceso y la eficiencia del transporte en la ZMVM.
+\end{abstract}
+
+\section{Introducción}
+La movilidad urbana en la Zona Metropolitana del Valle de México (ZMVM) es un fenómeno complejo que involucra factores demográficos, socioeconómicos y de infraestructura. Para comprender mejor los patrones de transporte, el INEGI realizó en 2017 la \textit{Encuesta Origen Destino en Hogares}, cuyo objetivo fue obtener información que permita conocer la movilidad actual de los habitantes de la ZMVM, respecto a sus características, motivo, duración, medios de transporte y horario de desplazamientos, entre otros aspectos de los viajes que realizan.
+
+En este trabajo utilizamos una aproximación basada en \textbf{redes bayesianas} para modelar las dependencias probabilísticas entre variables de interés, y responder consultas que permiten evaluar probabilidades condicionales asociadas al uso de transporte público o privado, duración de viajes y su relación con estrato socioeconómico, edad y sexo.
+
+\section{Metodología}
+
+\begin{enumerate}
+    \item \textbf{Selección y preparación de variables}: Se identificaron variables relevantes de la EOD 2017, entre ellas: edad, sexo, estrato socioeconómico, día de la semana, medio de transporte, tiempo de viaje y localidad de origen. Variables continuas como edad y tiempo de viaje fueron discretizadas en categorías (\textit{Adulto/Menor} y \textit{Corto/Largo}).
+    
+    \item \textbf{Construcción de DAGs}: Se propusieron tres grafos dirigidos acíclicos (DAGs) con diferentes enfoques:
+    \begin{itemize}
+        \item \textbf{DAG 1}: basado en sentido común (demografía $\rightarrow$ estrato $\rightarrow$ transporte $\rightarrow$ tiempo de viaje).
+        \item \textbf{DAG 2}: centrado en demografía (edad y sexo influyen en estrato y transporte).
+        \item \textbf{DAG 3}: centrado en transporte (transporte como nodo central entre demografía y tiempos de viaje).
+    \end{itemize}
+    
+    \item Etc, como seleccion de mejor dag y consultas (queries)
+\end{enumerate}
+
+\section{Aplicación}
+Se formularon las siguientes consultas de interés:
+
+\begin{enumerate}
+    \item \textbf{¿Cuál es la probabilidad de que una persona mayor de 18 años use como medio de transporte el tren (metro, tren ligero o suburbano)?} Se condicionó en la red bayesiana al estado \textit{Adulto} y se calculó la probabilidad conjunta de elegir transporte ferroviario.
+    {\small \[
+    \mathbb{P}(T \in \{\text{metro, tren ligero, suburbano}\} \mid A = \text{adult})
+    \]}
+    
+    \item \textbf{¿Cuál es la probabilidad de utilizar transporte privado en un día entre semana en comparación con el fin de semana?} Se condicionó la variable día (semana = 1, fin de semana = 2), contrastando el uso de automóvil y taxi privado.
+    {\small \[
+    \mathbb{P}(T \in \{\text{automóvil, taxi privado}\} \mid D = \text{semana})
+    \]}
+    {\small \[
+    \mathbb{P}(T \in \{\text{automóvil, taxi privado}\} \mid D = \text{fin de semana})
+    \]}
+    
+    \item \textbf{¿Cuál es la probabilidad de que un hombre adulto use el automóvil por motivos de trabajo?} La evidencia fijada fue sexo=“Hombre” y edad=“Adulto”, evaluando la probabilidad de elegir automóvil.
+    {\small \[
+    \mathbb{P}(T = \text{automóvil} \mid S = \text{hombre}, A = \text{adult})
+    \]}
+    
+    \item \textbf{¿Quién es más probable que tarde más de 1 hora 30 minutos de casa al trabajo, una persona de estrato bajo o alto?} Se compararon probabilidades condicionales sobre la variable \textit{tiempo de viaje} en función del estrato socioeconómico.
+    {\small \[
+    \mathbb{P}(\text{tiempo de viaje} > 90 \text{ min} \mid E = \text{bajo})
+    \]}
+    {\small \[
+    \mathbb{P}(\text{tiempo de viaje} > 90 \text{ min} \mid E = \text{alto})
+    \]}
+\end{enumerate}
+
+RESULTADOOOOOOOOOS
+
+\section{Conclusiones}
+BORRAR Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad.
+
+
+
+
+
+
+
+\section{Referencias}
+\begin{thebibliography}{9}
+
+\bibitem{inegi2017} % \cite{inegi2017}
+Instituto Nacional de Estadística y Geografía (INEGI),
+\textit{Encuesta Origen–Destino en Hogares de la Zona Metropolitana del Valle de México 2017},
+México, 2018.
+Disponible en: \url{https://www.inegi.org.mx/programas/eod/2017/}, consultado el 31 de agosto de 2025.
+
+\end{thebibliography}
+
+\end{document}
