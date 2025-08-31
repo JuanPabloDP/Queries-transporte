@@ -13,7 +13,11 @@ editor: visual
 # Actividad: Queries sobre transporte
 
 ## Preguntas a responder
-1.- ¿Cuál es la probabilidad de que una persona mayor de 18 años use como medio de transporte el tren? 2.- ¿Cuál es la probabilidad de que se utilice transporte privado en un día entre semana en comparación con el fin de semana? 3.- ¿Cuál es la probabilidad de que un hombre adulto use el automóvil por motivos de trabajo? 4.-¿Quién es más probable que haga más de 1hr 30 min de su casa al trabajo, una persona de estatus sociodemográfico bajo o una persona de estatus sociodemográfico alto?
+
+1.  ¿Cuál es la probabilidad de que una persona mayor de 18 años use como medio de transporte el tren?
+2.  ¿Cuál es la probabilidad de que se utilice transporte privado en un día entre semana en comparación con el fin de semana?
+3.  ¿Cuál es la probabilidad de que un hombre adulto use el automóvil por motivos de trabajo?
+4.  ¿Quién es más probable que haga más de 1hr 30 min de su casa al trabajo, una persona de estatus sociodemográfico bajo o una persona de estatus sociodemográfico alto?
 
 ```{r}
 library(bnlearn)
@@ -223,11 +227,11 @@ cpquery(bn_best_dag, event = ((p5_14 == "5") | (p5_14 == "12") | (p5_14 == "13")
 ```
 
 ```{r}
-#2.- ¿Probabilidad transporte privado semana vs fin de semana?
+#2.- ¿Probabilidad transporte privado semana vs fin de semana? (considerando automóvil,moto y bicicleta)
 # Semana (código 1)
-cpquery(bn_best_dag, event = ((p5_14 == "1") | (p5_14 == "9")), evidence = (p5_3 == "1"), n = 10^6)
+cpquery(bn_best_dag, event = ((p5_14 == "1") | (p5_14 == "9") | (p5_14 == "7")), evidence = (p5_3 == "1"), n = 10^6)
 # Fin de semana (código 2) 
-cpquery(bn_best_dag, event = ((p5_14 == "1") | (p5_14 == "9")), evidence = (p5_3 == "2"), n = 10^6)
+cpquery(bn_best_dag, event = ((p5_14 == "1") | (p5_14 == "9") | (p5_14 == "7")), evidence = (p5_3 == "2"), n = 10^6)
 ```
 
 ```{r}
@@ -244,7 +248,6 @@ cpquery(bn_best_dag, event = (tiempo_viaje == "Largo"), evidence = (estrato == "
 cpquery(bn_best_dag, event = (tiempo_viaje == "Largo"), evidence = (estrato == "Alto"), n = 10^6)
 ```
 
-
 # Likelihood weighting
 
 ```{r}
@@ -252,6 +255,7 @@ cpquery(bn_best_dag, event = (tiempo_viaje == "Largo"), evidence = (estrato == "
 # (Tren ligero=12, Tren suburbano=13, Metro=5)
 cpquery(bn_best_dag, event = ((p5_14 == "5") | (p5_14 == "12") | (p5_14 == "13")), evidence = list(edad = "Adulto"), method = "lw")
 ```
+
 ```{r}
 #2.- ¿Probabilidad transporte privado semana vs fin de semana?
 # Semana 
@@ -259,11 +263,13 @@ cpquery(bn_best_dag, event = ((p5_14 == "1") | (p5_14 == "9")), evidence = list(
 # Fin de semana 
 cpquery(bn_best_dag, event = ((p5_14 == "1") | (p5_14 == "9")), evidence = list(p5_3 = "2"), method = "lw")
 ```
+
 ```{r}
 # 3.-¿Probabilidad hombre adulto use automóvil?
 # (Solo automóvil=1, hombre=1, adulto)
 cpquery(bn_best_dag, event = (p5_14 == "1"), evidence = list(sexo = "1", edad = "Adulto"), method = "lw")
 ```
+
 ```{r}
 #4.- ¿Quién hace más de 90min, estrato bajo vs alto?
 # Estrato bajo
@@ -271,7 +277,6 @@ cpquery(bn_best_dag, event = (tiempo_viaje == "Largo"), evidence = list(estrato 
 # Estrato alto  
 cpquery(bn_best_dag, event = (tiempo_viaje == "Largo"), evidence = list(estrato = "Alto"), method = "lw")
 ```
-
 
 ```{r}
 pdf("../figures/DAG1_sentido_comun.pdf", width=10, height=8)
@@ -317,5 +322,3 @@ tabla_latex <- kable(arc.strength(best_dag, data = ttransporte_discreto, criteri
 
 cat(tabla_latex, file = "../figures/fuerza_arcos.tex")
 ```
-
-
