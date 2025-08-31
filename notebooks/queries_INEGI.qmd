@@ -11,18 +11,19 @@ editor: visual
 ---
 
 # Actividad: Queries sobre transporte
+
 ## Preguntas a responder
-1.- ¿Cuál es la probabilidad de que una persona mayor de 18 años use como medio de transporte el tren? 
-2.- ¿Cuál es la probabilidad de que se utilice transporte privado en un día entre semana en comparación con el fin de semana? 
-3.- ¿Cuál es la probabilidad de que un hombre adulto use el automóvil por motivos de trabajo? 
-4.-¿Quién es más probable que haga más de 1hr 30 min de su casa al trabajo, una persona de estatus sociodemográfico bajo o una persona de estatus sociodemográfico alto?
+
+1.- ¿Cuál es la probabilidad de que una persona mayor de 18 años use como medio de transporte el tren? 2.- ¿Cuál es la probabilidad de que se utilice transporte privado en un día entre semana en comparación con el fin de semana? 3.- ¿Cuál es la probabilidad de que un hombre adulto use el automóvil por motivos de trabajo? 4.-¿Quién es más probable que haga más de 1hr 30 min de su casa al trabajo, una persona de estatus sociodemográfico bajo o una persona de estatus sociodemográfico alto?
 
 ```{r}
 library(bnlearn)
-ttransporte <- read.csv("C:\\Users\\brapi\\OneDrive\\Documents\\Análisis_metodos_razonamiento\\Queries-transporte\\data\\conjunto_de_datos\\ttransporte.csv")
+ttransporte <- read.csv("../data/conjunto_de_datos/ttransporte.csv")
 head(ttransporte)
 ```
-Tomando en cuenta las preguntas a responder, se determinó que las variables ideóneas eran: 
+
+Tomando en cuenta las preguntas a responder, se determinó que las variables ideóneas eran:
+
 ```{r}
 vars_clave <- c("edad", "sexo", "estrato", "tloc", 
                 "p5_3", "p5_14", "p5_16_1_1", "p5_16_1_2")
@@ -32,7 +33,6 @@ ttransporte_clave <- ttransporte[ , vars_clave]
 head(ttransporte_clave)
 
 ```
-
 
 ```{r}
 ttransporte_discreto <- ttransporte_clave
@@ -104,8 +104,8 @@ ttransporte_discreto[] <- lapply(ttransporte_discreto, function(x) {
 })
 ```
 
-
 # DAG 1 (Sentido común)
+
 ```{r}
 
 dag_1 <- empty.graph(nodes = c("sexo", "edad", "estrato", "tloc", "p5_3", "p5_14", "tiempo_viaje"))
@@ -135,6 +135,7 @@ arc.strength(dag_1, data = ttransporte_discreto, criterion = "mi")
 ```
 
 # DAG 2 centrada en demografía
+
 ```{r}
 dag_2 <- empty.graph(nodes = c("sexo", "edad", "estrato", "tloc", "p5_3", "p5_14", "tiempo_viaje"))
 
@@ -162,7 +163,9 @@ score(dag_2, data = ttransporte_discreto, type = "bic")
 ```{r}
 arc.strength(dag_2, data = ttransporte_discreto, criterion = "mi")
 ```
+
 # DAG 3 centrada en el transporte
+
 ```{r}
 dag_3 <- empty.graph(nodes = c("sexo", "edad", "estrato", "tloc", "p5_3", "p5_14", "tiempo_viaje"))
 
@@ -188,12 +191,14 @@ score(dag_3, data = ttransporte_discreto, type = "bic")
 ```{r}
 arc.strength(dag_1, data = ttransporte_discreto, criterion = "mi")
 ```
+
 # Mejor DAG con hill climbing
 
 ```{r}
 best_dag <- hc(ttransporte_discreto)
 graphviz.plot(best_dag, shape = "ellipse")
 ```
+
 ```{r}
 score(best_dag, data = ttransporte_discreto, type = "bic")
 ```
@@ -230,6 +235,53 @@ cpquery(bn_best_dag, event = (p5_14 == "1"), evidence = ((sexo == "1") & (edad =
 cpquery(bn_best_dag, event = (tiempo_viaje == "Largo"), evidence = (estrato == "Bajo"), n = 10^6)
 # Estrato alto  
 cpquery(bn_best_dag, event = (tiempo_viaje == "Largo"), evidence = (estrato == "Alto"), n = 10^6)
+```
+
+```{r}
+pdf("../figures/DAG1_sentido_comun.pdf", width=10, height=8)
+graphviz.plot(dag_1, shape="ellipse", main="DAG 1: Sentido Común")
+dev.off()
+
+pdf("../figures/DAG2_demografia.pdf", width=10, height=8)
+graphviz.plot(dag_2, shape="ellipse", main="DAG 2: Centrada en Demografía")
+dev.off()
+
+pdf("../figures/DAG3_transporte.pdf", width=10, height=8)
+graphviz.plot(dag_3, shape="ellipse", main="DAG 3: Centrada en Transporte")
+dev.off()
+
+pdf("../figures/DAG_best.pdf", width=10, height=8)
+graphviz.plot(best_dag, shape="ellipse", main="Mejor DAG (Hill Climbing)")
+dev.off()
+
+```
+
+```{r}
+install.packages("reshape2")
+library(reshape2)
+install.packages("ggplot2")
+library(ggplot2)
+
+pdf("../figures/heatmap_informacion_mutua.pdf", width=10, height=8)
+mi_matrix <- arc.strength(best_dag, data=ttransporte_discreto, criterion="mi")
+mi_matrix_long <- melt(mi_matrix, id.vars=c("from","to"))
+
+ggplot(mi_matrix_long, aes(x=from, y=to, fill=value)) +
+  geom_tile() +
+  scale_fill_gradient(low="white", high="red") +
+  labs(title="Mapa de información mutua entre nodos", x="De", y="A", fill="MI") +
+  theme_minimal() +
+  theme(axis.text.x=element_text(angle=45, hjust=1))
+dev.off()
+```
+
+```{r}
+library(knitr)
+
+tabla_latex <- kable(strengths, format = "latex", booktabs = TRUE,
+                     caption = "Fuerza de arcos (información mutua) de la red bayesiana")
+
+cat(tabla_latex, file = "../figures/fuerza_arcos.tex")
 ```
 
 

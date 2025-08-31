@@ -7,6 +7,8 @@
 \usepackage{url}
 \usepackage[a4paper, left=1.5cm, right=1.5cm, top=2.5cm, bottom=2.5cm]{geometry}
 \usepackage{etoolbox}
+\usepackage{booktabs}
+%\usepackage{svg}
 \patchcmd{\thebibliography}{\section*{\refname}}{}{}{}
 
 \title{Análisis de la Movilidad en la Zona Metropolitana del Valle de México con Redes Bayesianas}
@@ -79,10 +81,47 @@ Se formularon las siguientes consultas de interés:
 
 RESULTADOOOOOOOOOS
 
+
+
 \section{Conclusiones}
 BORRAR Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad.
 
+\input{figures/fuerza_arcos.tex}
 
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\columnwidth]{figures/DAG1_sentido_comun.pdf}
+    \caption{DAG 1: Sentido Común}
+    \label{fig:dag1}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\columnwidth]{figures/DAG2_demografia.pdf}
+    \caption{DAG 2: Centrada en Demografía}
+    \label{fig:dag2}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\columnwidth]{figures/DAG3_transporte.pdf}
+    \caption{DAG 3: Centrada en Transporte}
+    \label{fig:dag3}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\columnwidth]{figures/DAG_best.pdf}
+    \caption{Mejor DAG obtenido por Hill Climbing}
+    \label{fig:dag_best}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\columnwidth]{figures/heatmap_informacion_mutua.pdf}
+    \caption{Heatmap de Información Mutua entre nodos de la red bayesiana}
+    \label{fig:heatmap_mi}
+\end{figure}
 
 
 
