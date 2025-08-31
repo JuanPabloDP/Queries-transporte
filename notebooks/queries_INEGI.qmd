@@ -253,9 +253,9 @@ cpquery(bn_best_dag, event = (p5_14 == "1"), evidence = ((sexo == "1") & (edad =
 ```{r}
 #4.- ¿Quién hace más de 90min de su casa al trabajo, estrato bajo vs alto?
 # Estrato bajo
-cpquery(bn_best_dag, event = (tiempo_viaje == "Largo"), evidence = (estrato == "Bajo" & p5_13 == "1" & p5_6 == "1"), n = 10^6)
+cpquery(bn_best_dag, event = (tiempo_viaje == "Largo"), evidence = (estrato == "Bajo" & p5_13 == "2" & p5_6 == "1"), n = 10^6)
 # Estrato alto  
-cpquery(bn_best_dag, event = (tiempo_viaje == "Largo"), evidence = (estrato == "Alto" & p5_13 == "1" & p5_6 == "1"), n = 10^6)
+cpquery(bn_best_dag, event = (tiempo_viaje == "Largo"), evidence = (estrato == "Alto" & p5_13 == "2" & p5_6 == "1"), n = 10^6)
 ```
 
 # Likelihood weighting
@@ -269,23 +269,23 @@ cpquery(bn_best_dag, event = ((p5_14 == "5") | (p5_14 == "12") | (p5_14 == "13")
 ```{r}
 #2.- ¿Probabilidad transporte privado semana vs fin de semana?
 # Semana 
-cpquery(bn_best_dag, event = ((p5_14 == "1") | (p5_14 == "9")), evidence = list(p5_3 = "1"), method = "lw")
+cpquery(bn_best_dag, event = ((p5_14 == "1") | (p5_14 == "9") | (p5_14 == "7")), evidence = list(p5_3 = "1"), method = "lw")
 # Fin de semana 
-cpquery(bn_best_dag, event = ((p5_14 == "1") | (p5_14 == "9")), evidence = list(p5_3 = "2"), method = "lw")
+cpquery(bn_best_dag, event = ((p5_14 == "1") | (p5_14 == "9")| (p5_14 == "7")), evidence = list(p5_3 = "2"), method = "lw")
 ```
 
 ```{r}
-# 3.-¿Probabilidad hombre adulto use automóvil?
+# 3.-¿Probabilidad hombre adulto use automóvil para el trabajo?
 # (Solo automóvil=1, hombre=1, adulto)
-cpquery(bn_best_dag, event = (p5_14 == "1"), evidence = list(sexo = "1", edad = "Adulto"), method = "lw")
+cpquery(bn_best_dag, event = (p5_14 == "1"), evidence = list(sexo = "1", edad = "Adulto", p5_13 = "2"), method = "lw")
 ```
 
 ```{r}
 #4.- ¿Quién hace más de 90min para llegar de su casa al trabajo, estrato bajo vs alto?
 # Estrato bajo
-cpquery(bn_best_dag, event = (tiempo_viaje == "Largo"), evidence = list(estrato = "Bajo"), method = "lw")
+cpquery(bn_best_dag, event = (tiempo_viaje == "Largo"), evidence = list(estrato = "Bajo", p5_13 = "2" , p5_6 = "1"), method = "lw")
 # Estrato alto  
-cpquery(bn_best_dag, event = (tiempo_viaje == "Largo"), evidence = list(estrato = "Alto"), method = "lw")
+cpquery(bn_best_dag, event = (tiempo_viaje == "Largo"), evidence = list(estrato = "Alto", p5_13 = "2" , p5_6 = "1"), method = "lw")
 ```
 
 ```{r}
