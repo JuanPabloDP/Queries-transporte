@@ -109,10 +109,10 @@ Se realizaron consultas específicas sobre movilidad utilizando la red bayesiana
     
     \item \textbf{¿Cuál es la probabilidad de utilizar transporte privado en un día entre semana en comparación con el fin de semana?}  
     {\footnotesize \[
-    \mathbb{P}\big(T \in \{\text{automóvil, taxi privado}\} \mid D = \text{semana}\big) = 0.1422
+    \mathbb{P}\big(T \in \{\text{automóvil, moto, bicicleta}\} \mid D = \text{semana}\big) = 0.1422
     \]}
     {\footnotesize \[
-    \mathbb{P}\big(T \in \{\text{automóvil, taxi privado}\} \mid D = \text{fin de sem}\big) = 0.1603
+    \mathbb{P}\big(T \in \{\text{automóvil, moto, bicicleta}\} \mid D = \text{fin de sem}\big) = 0.1603
     \]}
     
     \item \textbf{¿Cuál es la probabilidad de que un hombre adulto use el automóvil por motivos de trabajo?}  
@@ -122,10 +122,10 @@ Se realizaron consultas específicas sobre movilidad utilizando la red bayesiana
     
     \item \textbf{¿Quién es más probable que tarde más de 1 hora 30 minutos de casa al trabajo, una persona de estrato bajo o alto?}  
     {\footnotesize \[
-    \mathbb{P}\big(\text{tiempo de viaje} > 90 \ \text{min} \mid E = \text{bajo}\big) = 0.0131
+    \mathbb{P}\big(\text{tiempo de viaje} > 90 \ \text{min} \mid E = \text{bajo}\big, p5_13 = \text{al trabajo}, p5_6 = \text{Casa}) = 0.0131
     \]}
     {\footnotesize \[
-    \mathbb{P}\big(\text{tiempo de viaje} > 90 \ \text{min} \mid E = \text{alto}\big) = 0.0170
+    \mathbb{P}\big(\text{tiempo de viaje} > 90 \ \text{min} \mid E = \text{alto}\big, p5_13 = \text{al trabajo}, p5_6 = \text{Casa}) = 0.0170
     \]}
 \end{enumerate}
 
@@ -142,7 +142,7 @@ A partir de los resultados obtenidos con la red bayesiana óptima, se pueden des
     La probabilidad de que un hombre adulto utilice automóvil para motivos de trabajo es de 11.91\%. Este valor, relativamente bajo, confirma que gran parte de este grupo recurre al transporte público en sus desplazamientos cotidianos, posiblemente por factores como tráfico, costo de combustible o disponibilidad de estacionamiento.
 
     \item \textbf{Duración de viajes según estrato socioeconómico.}  
-    Las probabilidades de realizar viajes largos (mayores a 90 minutos) son bajas en general, aunque ligeramente superiores en el estrato alto (1.70\%) en comparación con el estrato bajo (1.31\%). Esto sugiere que el estrato alto presenta mayor tolerancia a trayectos extensos, probablemente por disponer de transporte privado que facilita recorrer distancias más largas hacia zonas de trabajo, estudio o recreación.
+    Las probabilidades de realizar viajes largos (mayores a 90 minutos) de casa al trabajo son bajas en general, aunque ligeramente superiores en el estrato alto (1.70\%) en comparación con el estrato bajo (1.31\%). Esto sugiere que el estrato alto presenta mayor tolerancia a trayectos extensos, probablemente por disponer de transporte privado que facilita recorrer distancias más largas hacia zonas de trabajo, estudio o recreación.
 \end{enumerate}
 En síntesis, estos hallazgos cuantitativos refuerzan la idea de que la movilidad en la ZMVM está condicionada tanto por factores demográficos como socioeconómicos, evidenciando desigualdades en el acceso, uso y experiencia del transporte urbano.
 
