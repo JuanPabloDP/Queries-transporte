@@ -30,25 +30,25 @@
 
             ==**Cambio:** se agregó propósito de viaje y origen==
 
--   [ ] Propongan al menos 3 diferentes DAGs que representen las relaciones de dependencia entre todas las variables de interés.
+-   [X ] Propongan al menos 3 diferentes DAGs que representen las relaciones de dependencia entre todas las variables de interés.
 
     ==**Falta:** actualizar==
 
--   [ ] Construyan una red bayesiana utilizando las DAGs que propusieron previamente.
+-   [ X] Construyan una red bayesiana utilizando las DAGs que propusieron previamente.
 
     -   [ ] ==**Falta:** actualizar==
 
--   [ ] Discutan la significancia de las relaciones de dependencia de sus DAGs.
+-   [ X] Discutan la significancia de las relaciones de dependencia de sus DAGs.
 
     -   [ ] ==**Falta:** actualizar==
 
--   [ ] ¿Cuál es la red que mejor se ajuste a sus datos? ¿Por qué?
+-   [X ] ¿Cuál es la red que mejor se ajuste a sus datos? ¿Por qué?
 
     -   [ ] ==**Falta:** actualizar==
 
 -   [x] Utilicen el algoritmo hill-climbing para obtener la mejor estructura de la DAG para estos datos.
 
--   [ ] Discutan la pertinencia de las relaciones de esta nueva DAG.
+-   [X] Discutan la pertinencia de las relaciones de esta nueva DAG.
 
     ==**Falta:** actualizar==
 
@@ -63,8 +63,8 @@
         -   [ ] desglozar metodología y aplicación 
             -   [ ] agreguen tablas
 
-            -   [ ] actualizar gráficos
+            -   [ X] actualizar gráficos
 
-            -   [ ] incluir estadísticos del qmd
+            -   [X ] incluir estadísticos del qmd
         -   [x] Introduccion
         -   [x] Abstract

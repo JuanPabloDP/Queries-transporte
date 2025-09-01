@@ -117,12 +117,13 @@ Se realizaron consultas específicas sobre movilidad utilizando la red bayesiana
     \mathbb{P}\big(T \in \{\text{automóvil, moto, bicicleta}\} \mid D = \text{fin de sem}\big) = 0.1603
     \]}
     
-  \item \textbf{¿Cuál es la probabilidad de que un hombre adulto use el automóvil por motivos de trabajo?}  
-    {\footnotesize
-    \[
-    \mathbb{P}\big(T = \text{automóvil} \mid S = \text{hombre}, A = \text{adulto}, M = \text{trabajo}\big) = 0.1191
-    \]
-    }
+    \item \textbf{¿Cuál es la probabilidad de que un hombre adulto use el automóvil por motivos de trabajo?}  
+        \[
+        \resizebox{0.85\columnwidth}{!}{$
+        \mathbb{P}\big(T = \text{automóvil} \mid S = \text{hombre}, A = \text{adulto}, M = \text{trabajo}\big) = 0.1191
+        $}
+        \]
+
     
     \item \textbf{¿Quién es más probable que tarde más de 1 hora 30 minutos de casa al trabajo, una persona de estrato bajo o alto?}  
     {\footnotesize
@@ -140,7 +141,6 @@ Se realizaron consultas específicas sobre movilidad utilizando la red bayesiana
 
 \end{enumerate}
 
-\section{Conclusiones}
 A partir de los resultados obtenidos con la red bayesiana óptima, se pueden destacar los siguientes hallazgos:
 \begin{enumerate}
     \item \textbf{Uso de transporte ferroviario en adultos.}  
@@ -155,7 +155,9 @@ A partir de los resultados obtenidos con la red bayesiana óptima, se pueden des
     \item \textbf{Duración de viajes según estrato socioeconómico.}  
     Las probabilidades de realizar viajes largos (mayores a 90 minutos) de casa al trabajo son bajas en general, aunque ligeramente superiores en el estrato alto (1.70\%) en comparación con el estrato bajo (1.31\%). Esto sugiere que el estrato alto presenta mayor tolerancia a trayectos extensos, probablemente por disponer de transporte privado que facilita recorrer distancias más largas hacia zonas de trabajo, estudio o recreación.
 \end{enumerate}
+\section{Conclusiones}
 En síntesis, estos hallazgos cuantitativos refuerzan la idea de que la movilidad en la ZMVM está condicionada tanto por factores demográficos como socioeconómicos, evidenciando desigualdades en el acceso, uso y experiencia del transporte urbano.
+En un futuro se podría buscar realizar un análisis similar al anterior tomando en cuenta más variables y variables más concretas para las incógnitas a responder y quizá sin una discretización tan amplia o con clases mejor balanceadas, con el objetivo de evidenciar relaciones más sutiles entre las variables. Asimismo, sería importante incorporar información extra sobre infraestructura vial o rutas de los servicios de transporte público para enriquecer la interpretación de los resultados y llegar a un modelo que verdaderamente muestre las relaciones de dependencia condicional que seguramente existen entre las variables a emplear.
 
 \section{Referencias}
 \begin{thebibliography}{9}
