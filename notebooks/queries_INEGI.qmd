@@ -283,5 +283,3 @@ tabla_latex <- kable(strengths, format = "latex", booktabs = TRUE,
 
 cat(tabla_latex, file = "../figures/fuerza_arcos.tex")
 ```
-
-
