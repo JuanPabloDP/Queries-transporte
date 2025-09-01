@@ -121,7 +121,7 @@ ttransporte_discreto[] <- lapply(ttransporte_discreto, function(x) {
 
 ```{r}
 
-dag_1 <- empty.graph(nodes = c("sexo", "edad", "estrato", "tloc", "p5_3", "p5_14", "tiempo_viaje"))
+dag_1 <- empty.graph(nodes = c("sexo", "edad", "estrato", "tloc", "p5_3", "p5_14", "tiempo_viaje", "p5_6", "p5_13"))
 
 arc_set_1 <- matrix(c("sexo", "estrato",        
                       "edad", "estrato",        
@@ -131,7 +131,13 @@ arc_set_1 <- matrix(c("sexo", "estrato",
                       "edad", "p5_14",
                       "p5_3", "p5_14",
                       "p5_14", "tiempo_viaje",
-                      "tloc", "tiempo_viaje"),
+                      "tloc", "tiempo_viaje",
+                      "tloc", "p5_6",
+                      "p5_6", "p5_13",
+                      "estrato", "p5_13",
+                      "sexo", "p5_13",
+                      "edad", "p5_13",
+                      "p5_13", "tiempo_viaje"),
                       byrow = TRUE, ncol = 2,
                       dimnames = list(NULL, c("from", "to")))
 
@@ -150,7 +156,7 @@ arc.strength(dag_1, data = ttransporte_discreto, criterion = "mi")
 # DAG 2 centrada en demografía
 
 ```{r}
-dag_2 <- empty.graph(nodes = c("sexo", "edad", "estrato", "tloc", "p5_3", "p5_14", "tiempo_viaje"))
+dag_2 <- empty.graph(nodes = c("sexo", "edad", "estrato", "tloc", "p5_3", "p5_14", "tiempo_viaje", "p5_6", "p5_13"))
 
 arc_set_2 <- matrix(c("edad", "estrato",
                       "sexo", "estrato",
@@ -160,7 +166,11 @@ arc_set_2 <- matrix(c("edad", "estrato",
                       "p5_3", "p5_14",
                       "estrato", "p5_14",
                       "p5_14", "tiempo_viaje",
-                      "estrato", "tiempo_viaje"),
+                      "estrato", "tiempo_viaje",
+                      "tloc", "p5_6",
+                      "p5_6", "p5_13",
+                      "estrato", "p5_13",
+                      "p5_13", "tiempo_viaje"),
                     byrow = TRUE, ncol = 2,
                     dimnames = list(NULL, c("from", "to")))
 
@@ -180,7 +190,7 @@ arc.strength(dag_2, data = ttransporte_discreto, criterion = "mi")
 # DAG 3 centrada en el transporte
 
 ```{r}
-dag_3 <- empty.graph(nodes = c("sexo", "edad", "estrato", "tloc", "p5_3", "p5_14", "tiempo_viaje"))
+dag_3 <- empty.graph(nodes = c("sexo", "edad", "estrato", "tloc", "p5_3", "p5_14", "tiempo_viaje", "p5_6", "p5_13"))
 
 arc_set_3 <- matrix(c("tloc", "estrato",
                       "edad", "p5_3",
@@ -189,7 +199,10 @@ arc_set_3 <- matrix(c("tloc", "estrato",
                       "p5_3", "p5_14",
                       "sexo", "p5_14",
                       "p5_14", "tiempo_viaje",
-                      "estrato", "tiempo_viaje"),
+                      "estrato", "tiempo_viaje",
+                      "tloc", "p5_6",
+                      "p5_6", "p5_13",
+                      "p5_13", "tiempo_viaje"),
                     byrow = TRUE, ncol = 2,
                     dimnames = list(NULL, c("from", "to")))
 

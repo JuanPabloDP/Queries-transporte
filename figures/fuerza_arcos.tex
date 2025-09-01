@@ -1,25 +1,32 @@
 \begin{table}
 
-\caption{\label{tab:unnamed-chunk-28}Fuerza de arcos (información mutua) de la red bayesiana}
+\caption{Fuerza de arcos (información mutua) de la red bayesiana}
 \centering
 \begin{tabular}[t]{llr}
 \toprule
 from & to & strength\\
 \midrule
+p5\_13 & p5\_6 & 0\\
+edad & p5\_13 & 0\\
+p5\_3 & p5\_13 & 0\\
+p5\_3 & p5\_6 & 0\\
+edad & p5\_6 & 0\\
+\addlinespace
 estrato & tloc & 0\\
-estrato & p5\_14 & 0\\
+sexo & p5\_13 & 0\\
+p5\_13 & p5\_14 & 0\\
+p5\_14 & estrato & 0\\
+sexo & p5\_6 & 0\\
+\addlinespace
 p5\_14 & tiempo\_viaje & 0\\
-p5\_14 & edad & 0\\
+edad & p5\_14 & 0\\
 sexo & p5\_14 & 0\\
-\addlinespace
 p5\_14 & tloc & 0\\
-p5\_14 & p5\_3 & 0\\
-edad & p5\_3 & 0\\
-sexo & edad & 0\\
-estrato & edad & 0\\
+p5\_6 & estrato & 0\\
 \addlinespace
+edad & p5\_3 & 0\\
 sexo & p5\_3 & 0\\
-sexo & estrato & 0\\
+edad & sexo & 0\\
 edad & tiempo\_viaje & 0\\
 \bottomrule
 \end{tabular}
