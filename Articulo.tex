@@ -88,17 +88,19 @@ En este trabajo utilizamos una aproximación basada en \textbf{redes bayesianas}
         
         \input{figures/fuerza_arcos.tex}
         
-        En la tabla y el heatmap (figura \ref{fig:heatmap_mi}) se aprecia que las dependencias más fuertes son entre \textit{estrato} y \textit{sexo}, mientras que varias otras relaciones presentan valores cercanos a cero.
-        
-        \begin{figure}[htbp]
-            \centering
-            \includegraphics[width=0.8\columnwidth]{figures/heatmap_informacion_mutua.pdf}
-            \caption{Heatmap de Información Mutua entre nodos de la red bayesiana}
-            \label{fig:heatmap_mi}
-        \end{figure}
-    
+        En la tabla y el heatmap (figura \ref{fig:heatmap_mi}) se aprecia que las dependencias más fuertes son entre \textit{edad} y \textit{sexo}, mientras que varias otras relaciones presentan valores cercanos a cero.
 \end{enumerate}
 
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=0.8\columnwidth]{figures/heatmap_informacion_mutua.pdf}
+        \caption{Heatmap de Información Mutua entre nodos de la red bayesiana}
+        \label{fig:heatmap_mi}
+    \end{figure}
+
+    
+ El hecho de que la fuerza en los arcos sea nula o casi nula implica que las dependencias condicionales entre las variables son demasiado pequeñas o inexistentes en los datos utilizados. Dado que se trabajó conlas variables de interés para dar una respuesta a las queries y se discretizaron las variables usadas de una manera pragmática, esto es indicio de que en la población efectivamente no existe una relación estadística entre las variables o bien que el proceso de limpieza y tratamiento de los datos, así como la eliminacióin de algunos casos con NA redujo la variabilidad disponible en el conjunto de datos. Sin embargo, es posible que con un conjunto de datos donde las categorías de las variables estuvieran más balanceadas se pudieran observar relaciones de dependencia invisibles a los DAGs presentados en este artículo. 
+ 
 \section{Aplicación}
 Se realizaron consultas específicas sobre movilidad utilizando la red bayesiana óptima.
 \begin{enumerate}
@@ -115,18 +117,27 @@ Se realizaron consultas específicas sobre movilidad utilizando la red bayesiana
     \mathbb{P}\big(T \in \{\text{automóvil, moto, bicicleta}\} \mid D = \text{fin de sem}\big) = 0.1603
     \]}
     
-    \item \textbf{¿Cuál es la probabilidad de que un hombre adulto use el automóvil por motivos de trabajo?}  
-    {\footnotesize \[
-    \mathbb{P}\big(T = \text{automóvil} \mid S = \text{hombre}, A = \text{adulto}\big) = 0.1191
-    \]}
+  \item \textbf{¿Cuál es la probabilidad de que un hombre adulto use el automóvil por motivos de trabajo?}  
+    {\footnotesize
+    \[
+    \mathbb{P}\big(T = \text{automóvil} \mid S = \text{hombre}, A = \text{adulto}, M = \text{trabajo}\big) = 0.1191
+    \]
+    }
     
     \item \textbf{¿Quién es más probable que tarde más de 1 hora 30 minutos de casa al trabajo, una persona de estrato bajo o alto?}  
-    {\footnotesize \[
-    \mathbb{P}\big(\text{tiempo de viaje} > 90 \ \text{min} \mid E = \text{bajo}\big, p5_13 = \text{al trabajo}, p5_6 = \text{Casa}) = 0.0131
-    \]}
-    {\footnotesize \[
-    \mathbb{P}\big(\text{tiempo de viaje} > 90 \ \text{min} \mid E = \text{alto}\big, p5_13 = \text{al trabajo}, p5_6 = \text{Casa}) = 0.0170
-    \]}
+    {\footnotesize
+    \[
+    \resizebox{\columnwidth}{!}{$
+    \mathbb{P}(\text{tiempo de viaje} > 90\ \text{min} \mid E = \text{bajo}, p5\_13 = \text{al trabajo}, p5\_6 = \text{Casa}) = 0.0131
+    $}
+    \]
+    \[
+    \resizebox{\columnwidth}{!}{$
+    \mathbb{P}(\text{tiempo de viaje} > 90\ \text{min} \mid E = \text{alto}, p5\_13 = \text{al trabajo}, p5\_6 = \text{Casa}) = 0.0170
+    $}
+    \]
+    }
+
 \end{enumerate}
 
 \section{Conclusiones}
@@ -148,11 +159,22 @@ En síntesis, estos hallazgos cuantitativos refuerzan la idea de que la movilida
 
 \section{Referencias}
 \begin{thebibliography}{9}
-\bibitem{inegi2017} % \cite{inegi2017}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+\bibitem{inegi2017} 
 Instituto Nacional de Estadística y Geografía (INEGI),
 \textit{Encuesta Origen–Destino en Hogares de la Zona Metropolitana del Valle de México 2017},
 México, 2018.
 Disponible en: \url{https://www.inegi.org.mx/programas/eod/2017/}, consultado el 31 de agosto de 2025.
+
+\bibitem{scutari2025} 
+Scutari, M.,
+\textit{arc.strength [R package documentation]},
+2025.
+Disponible en: \url{https://www.bnlearn.com/documentation/man/arc.strength.html}, consultado el 31 de agosto de 2025.
+
 \end{thebibliography}
+
+
 
 \end{document}
