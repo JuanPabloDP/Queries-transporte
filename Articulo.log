@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.10.30)  31 AUG 2025 02:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.10.30)  31 AUG 2025 20:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -164,20 +164,20 @@ File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 ) (./Articulo.aux)
 \openout1 = `Articulo.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
  (c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
@@ -218,76 +218,79 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 25.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 26.
 (c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 25.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 26.
  (c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 
+<figures/DAG1_sentido_comun.pdf, id=1, 722.7pt x 578.16pt>
+File: figures/DAG1_sentido_comun.pdf Graphic file (type pdf)
+<use figures/DAG1_sentido_comun.pdf>
+Package pdftex.def Info: figures/DAG1_sentido_comun.pdf  used on input line 46.
+(pdftex.def)             Requested size: 200.86061pt x 160.6839pt.
+<figures/DAG2_demografia.pdf, id=2, 722.7pt x 578.16pt>
+File: figures/DAG2_demografia.pdf Graphic file (type pdf)
+<use figures/DAG2_demografia.pdf>
+Package pdftex.def Info: figures/DAG2_demografia.pdf  used on input line 55.
+(pdftex.def)             Requested size: 200.86061pt x 160.6839pt.
 
 
 [1{c:/Users/User/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
-]
-
-(./figures/fuerza_arcos.tex)
-<figures/DAG1_sentido_comun.pdf, id=18, 722.7pt x 578.16pt>
-File: figures/DAG1_sentido_comun.pdf Graphic file (type pdf)
-<use figures/DAG1_sentido_comun.pdf>
-Package pdftex.def Info: figures/DAG1_sentido_comun.pdf  used on input line 93.
-(pdftex.def)             Requested size: 200.86061pt x 160.6839pt.
-<figures/DAG2_demografia.pdf, id=19, 722.7pt x 578.16pt>
-File: figures/DAG2_demografia.pdf Graphic file (type pdf)
-<use figures/DAG2_demografia.pdf>
-Package pdftex.def Info: figures/DAG2_demografia.pdf  used on input line 100.
-(pdftex.def)             Requested size: 200.86061pt x 160.6839pt.
-<figures/DAG3_transporte.pdf, id=20, 722.7pt x 578.16pt>
+ <./figures/DAG1_sentido_comun.pdf>]
+<figures/DAG3_transporte.pdf, id=23, 722.7pt x 578.16pt>
 File: figures/DAG3_transporte.pdf Graphic file (type pdf)
 <use figures/DAG3_transporte.pdf>
-Package pdftex.def Info: figures/DAG3_transporte.pdf  used on input line 107.
+Package pdftex.def Info: figures/DAG3_transporte.pdf  used on input line 64.
 (pdftex.def)             Requested size: 200.86061pt x 160.6839pt.
-<figures/DAG_best.pdf, id=21, 722.7pt x 578.16pt>
+<figures/DAG_best.pdf, id=24, 722.7pt x 578.16pt>
 File: figures/DAG_best.pdf Graphic file (type pdf)
 <use figures/DAG_best.pdf>
-Package pdftex.def Info: figures/DAG_best.pdf  used on input line 114.
+Package pdftex.def Info: figures/DAG_best.pdf  used on input line 78.
 (pdftex.def)             Requested size: 200.86061pt x 160.6839pt.
-<figures/heatmap_informacion_mutua.pdf, id=22, 722.7pt x 578.16pt>
+ (./figures/fuerza_arcos.tex
+
+)
+<figures/heatmap_informacion_mutua.pdf, id=25, 722.7pt x 578.16pt>
 File: figures/heatmap_informacion_mutua.pdf Graphic file (type pdf)
 <use figures/heatmap_informacion_mutua.pdf>
-Package pdftex.def Info: figures/heatmap_informacion_mutua.pdf  used on input line 121.
+Package pdftex.def Info: figures/heatmap_informacion_mutua.pdf  used on input line 95.
 (pdftex.def)             Requested size: 200.86061pt x 160.6839pt.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[2 <./figures/DAG2_demografia.pdf> <./figures/DAG3_transporte.pdf> <./figures/DAG_best.pdf> <./figures/heatmap_informacion_mutua.pdf>]
+
+
+Underfull \hbox (badness 2547) in paragraph at lines 144--146
+[]\OT1/cmr/bx/n/10 Duraci^^Son de vi-a-jes seg^^Sun es-trato so-cioe-
+ []
 
 
 
-[2 <./figures/DAG1_sentido_comun.pdf>]
-
-
-
-[3 <./figures/DAG2_demografia.pdf> <./figures/DAG3_transporte.pdf> <./figures/DAG_best.pdf> <./figures/heatmap_informacion_mutua.pdf>] (./Articulo.aux)
+[3] (./Articulo.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-10-09>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 3347 strings out of 475537
- 50204 string characters out of 5775943
- 451603 words of memory out of 5000000
- 25964 multiletter control sequences out of 15000+600000
- 568019 words of font info for 75 fonts, out of 8000000 for 9000
+ 3338 strings out of 475537
+ 50130 string characters out of 5775943
+ 450616 words of memory out of 5000000
+ 25959 multiletter control sequences out of 15000+600000
+ 566474 words of font info for 69 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 57i,9n,65p,3010b,284s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <c:/Users/User/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk><c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb><c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Articulo.pdf (3 pages, 198503 bytes).
+ 57i,9n,65p,1141b,375s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <c:/Users/User/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk><c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/Users/User/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on Articulo.pdf (3 pages, 240496 bytes).
 PDF statistics:
- 110 PDF objects out of 1000 (max. 8388607)
- 68 compressed objects within 1 object stream
+ 130 PDF objects out of 1000 (max. 8388607)
+ 80 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,6 +1,5 @@
-% RECOMIENDO TRABAJAR EN OVERLEAF Y PEGAR AQUI
-
 \documentclass[twocolumn]{article}
+
 \usepackage{graphicx} % Required for inserting images
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -9,15 +8,17 @@
 \usepackage{etoolbox}
 \usepackage{booktabs}
 %\usepackage{svg}
+
 \patchcmd{\thebibliography}{\section*{\refname}}{}{}{}
 
 \title{Análisis de la Movilidad en la Zona Metropolitana del Valle de México con Redes Bayesianas}
+
 \author{
 Alan Fernando Bravo Pimentel \and
 Gonzalo Makenly Higuera Inzunza \and
 Juan Pablo de la Peña Gonzalez \and
-Sarah Camila Guzmán Fierro
-}
+Sarah Camila Guzmán Fierro}
+
 \date{Agosto 2025}
 
 \begin{document}
@@ -26,20 +27,18 @@ Sarah Camila Guzmán Fierro
 
 \begin{abstract}
 En este estudio utilizamos datos de la \textit{Encuesta Origen Destino en Hogares} (EOD 2017), de la Zona Metropolitana del Valle de México (ZMVM) -recopilada por el Instituto Nacional de Estadística y Geografía (INEGI)-, para responder consultas probabilísticas relacionadas con el uso de transporte. El objetivo principal es comprender patrones dentro de los hábitos de transporte de la población ya sean socioeconómicos, por edad, o sexo. Se construyeron redes bayesianas a partir de las variables a observar, se propusieron tres estructuras iniciales de grafos dirigidos acíclicos (DAGs), y posteriormente se aplicó el algoritmo \textit{hill-climbing} para identificar la estructura con mejor ajuste. Los resultados muestran que los adultos presentan gran probabilidad de utilizar transporte ferroviario; el uso de transporte privado es más común en fin de semana que en días hábiles; los hombres adultos son poco propensos a usar automóvil por motivos de trabajo; y los individuos de estrato bajo tienen menor probabilidad de realizar viajes de más de 90 minutos de sus casas al trabajo.
-
 \end{abstract}
 
 \section{Introducción}
 La movilidad urbana en la Zona Metropolitana del Valle de México (ZMVM) es un fenómeno complejo que involucra factores demográficos, socioeconómicos y de infraestructura. Para comprender mejor los patrones de transporte, el INEGI realizó en 2017 la \textit{Encuesta Origen Destino en Hogares}, cuyo objetivo fue obtener información que permita conocer la movilidad actual de los habitantes de la ZMVM. Este contiene bases de datos relacionadas mediante llaves, se pueden observar datos del viaje que tomó la persona encuestada, sus datos de patrimonio, localidad y estado de vivienda. Hay conteos similares como la Encuesta Anual del Transporte, igualmente sostenida por el INEGI, la Encuesta de Movilidad del Estado de México, Encuesta de Percepción de la Seguridad en el Transporte Público, así como estadísticos proporcionados por la Secretaria de Comunicaciones y Transportes; todos los cuales tienen como objetivo aportar conocimiento sobre la calidad y seguridad de la distribución de volumen vehicular.
 
-En este trabajo utilizamos una aproximación basada en \textbf{redes bayesianas} para modelar las dependencias probabilísticas entre variables de interés, y responder consultas que permiten evaluar probabilidades condicionales asociadas al uso de transporte público o privado, duración de viajes y su relación con estrato socioeconómico, edad y sexo. Estos resultados tienen el propósito de probocar reflexión sobre las posibles ventajas o desventajas que pueda presentar un grupo demográfico.
+En este trabajo utilizamos una aproximación basada en \textbf{redes bayesianas} para modelar las dependencias probabilísticas entre variables de interés, y responder consultas que permiten evaluar probabilidades condicionales asociadas al uso de transporte público o privado, duración de viajes y su relación con estrato socioeconómico, edad y sexo. Estos resultados tienen el propósito de provocar reflexión sobre las posibles ventajas o desventajas que pueda presentar un grupo demográfico.
 
 \section{Metodología}
-
 \begin{enumerate}
     \item \textbf{Selección y preparación de variables}: Se identificaron variables relevantes: edad, sexo, estrato socioeconómico, día de la semana (entre semana ó fin de semana), medio de transporte, tiempo, propósito y origen de viaje; localidad de origen. Variables continuas como edad y tiempo de viaje fueron discretizadas en categorías (\textit{Adulto/Menor} y \textit{Corto/Largo}).
-  
-    \item \textbf{Construcción de DAGs}: Se propusieron tres grafos dirigidos acíclicos (DAGs) con diferentes enfoques: construcción por intuición, con prioridad a la demografía y con prioridad al concepto de transporte. A su vez se calculó su \textit{Criterio de información bayesiano (BIC)} y la fuerza de los arco.
+      
+    \item \textbf{Construcción de DAGs}: Se propusieron tres grafos dirigidos acíclicos (DAGs) con diferentes enfoques: construcción por intuición, con prioridad a la demografía y con prioridad al concepto de transporte. A su vez se calculó su \textit{Criterio de información bayesiano (BIC)} y la fuerza de los arcos.
     \begin{itemize}
         \item \textbf{DAG 1}: basada en sentido común. 
             \begin{figure}[htbp]
@@ -49,7 +48,7 @@ En este trabajo utilizamos una aproximación basada en \textbf{redes bayesianas}
                 \label{fig:dag1}
             \end{figure}
             
-            $BIC_1=-4041940$
+            $BIC_1=-6327715$
         \item \textbf{DAG 2}: centrada en demografía. 
             \begin{figure}[htbp]
                 \centering
@@ -58,7 +57,7 @@ En este trabajo utilizamos una aproximación basada en \textbf{redes bayesianas}
                 \label{fig:dag2}
             \end{figure}
             
-            $BIC_2=-4093969$
+            $BIC_2=-6454501$
         \item \textbf{DAG 3}: centrada en transporte. 
             \begin{figure}[htbp]
                 \centering
@@ -67,11 +66,13 @@ En este trabajo utilizamos una aproximación basada en \textbf{redes bayesianas}
                 \label{fig:dag3}
             \end{figure}
             
-            $BIC_3=-4057150$
+            $BIC_3=-6419025$
     \end{itemize}
+    
     De acuerdo con la métrica $BIC$, la estructura que mejor se ajusta a los datos fue DAG 1, basado en sentido común; seguido por DAG 3, centrada en transporte, y por último, DAG 2, centrada en demografía. Siendo $BIC_1>BIC_3>BIC_2$. 
     
-    \item \textbf{DAG óptima}:A través de \textit{Hill-climbing}, algoritmo que maximizan un score dado, se encontró la configuración que mejor se adapta a la estructura de los datos. 
+    \item \textbf{DAG óptima}: A través de \textit{Hill-climbing}, algoritmo que maximiza un score dado, se encontró la configuración que mejor se adapta a la estructura de los datos.
+    
         \begin{figure}[htbp]
             \centering
             \includegraphics[width=0.8\columnwidth]{figures/DAG_best.pdf}
@@ -79,15 +80,15 @@ En este trabajo utilizamos una aproximación basada en \textbf{redes bayesianas}
             \label{fig:dag_best}
         \end{figure}
 
-        $BIC_Z=-4028409$
+        $BIC_Z=-6152622$
         
-Efectivamente esta DAG óptima cuenta con un mayor valor en la métrica $BIC$, contra la mejor propuesta anteriormente. Bajo esta estructura se establece la variable \textit{edad} como único nodo independiente. Esto brinda información relevante sobre la alta dependencia de las demás variables sobre dicha variable. 
+        Esta DAG óptima cuenta con un mayor valor en la métrica $BIC$, contra la mejor propuesta anteriormente. Bajo esta estructura se establece la variable \textit{edad} como único nodo independiente, lo que brinda información relevante sobre la alta dependencia de las demás variables respecto a la edad.
 
         Así mismo se investigó cada relación de dependencia de la DAG óptima, por medio de una Prueba de independencia (condicional). 
         
         \input{figures/fuerza_arcos.tex}
         
-        Se registró la información dentro de una tabla, parece haber relaciones muy débiles, puesto que son cercanas a cero; en la tabla registradas como tal. En el siguiente gráfico se logra apreciar de mejor manera la relación de dependencia predominante. Muestra que \textit{estrato} tiene una alta dependencia de \textit{sexo}, en comparación a otras dependencias. 
+        En la tabla y el heatmap (figura \ref{fig:heatmap_mi}) se aprecia que las dependencias más fuertes son entre \textit{estrato} y \textit{sexo}, mientras que varias otras relaciones presentan valores cercanos a cero.
         
         \begin{figure}[htbp]
             \centering
@@ -99,54 +100,59 @@ Efectivamente esta DAG óptima cuenta con un mayor valor en la métrica $BIC$, c
 \end{enumerate}
 
 \section{Aplicación}
-Se formularon las siguientes consultas de interés:
-
+Se realizaron consultas específicas sobre movilidad utilizando la red bayesiana óptima.
 \begin{enumerate}
-    \item \textbf{¿Cuál es la probabilidad de que una persona mayor de 18 años use como medio de transporte el tren (metro, tren ligero o suburbano)?} Se condicionó en la red bayesiana al estado \textit{Adulto} y se calculó la probabilidad conjunta de elegir transporte ferroviario.
-    {\small \[
-    \mathbb{P}(T \in \{\text{metro, tren ligero, suburbano}\} \mid A = \text{adult})
+    \item \textbf{¿Cuál es la probabilidad de que una persona mayor de 18 años use como medio de transporte el tren (metro, tren ligero o suburbano)?}  
+    {\footnotesize \[
+    \mathbb{P}\big(T \in \{\text{metro, tren ligero, suburbano}\} \mid A = \text{adulto}\big) = 0.0868
     \]}
     
-    \item \textbf{¿Cuál es la probabilidad de utilizar transporte privado en un día entre semana en comparación con el fin de semana?} Se condicionó la variable día (semana = 1, fin de semana = 2), contrastando el uso de automóvil y taxi privado.
-    {\small \[
-    \mathbb{P}(T \in \{\text{automóvil, taxi privado}\} \mid D = \text{semana})
+    \item \textbf{¿Cuál es la probabilidad de utilizar transporte privado en un día entre semana en comparación con el fin de semana?}  
+    {\footnotesize \[
+    \mathbb{P}\big(T \in \{\text{automóvil, taxi privado}\} \mid D = \text{semana}\big) = 0.1422
     \]}
-    {\small \[
-    \mathbb{P}(T \in \{\text{automóvil, taxi privado}\} \mid D = \text{fin de semana})
-    \]}
-    
-    \item \textbf{¿Cuál es la probabilidad de que un hombre adulto use el automóvil por motivos de trabajo?} La evidencia fijada fue sexo=“Hombre” y edad=“Adulto”, evaluando la probabilidad de elegir automóvil.
-    {\small \[
-    \mathbb{P}(T = \text{automóvil} \mid S = \text{hombre}, A = \text{adult})
+    {\footnotesize \[
+    \mathbb{P}\big(T \in \{\text{automóvil, taxi privado}\} \mid D = \text{fin de sem}\big) = 0.1603
     \]}
     
-    \item \textbf{¿Quién es más probable que tarde más de 1 hora 30 minutos de casa al trabajo, una persona de estrato bajo o alto?} Se compararon probabilidades condicionales sobre la variable \textit{tiempo de viaje} en función del estrato socioeconómico.
-    {\small \[
-    \mathbb{P}(\text{tiempo de viaje} > 90 \text{ min} \mid E = \text{bajo})
+    \item \textbf{¿Cuál es la probabilidad de que un hombre adulto use el automóvil por motivos de trabajo?}  
+    {\footnotesize \[
+    \mathbb{P}\big(T = \text{automóvil} \mid S = \text{hombre}, A = \text{adulto}\big) = 0.1191
     \]}
-    {\small \[
-    \mathbb{P}(\text{tiempo de viaje} > 90 \text{ min} \mid E = \text{alto})
+    
+    \item \textbf{¿Quién es más probable que tarde más de 1 hora 30 minutos de casa al trabajo, una persona de estrato bajo o alto?}  
+    {\footnotesize \[
+    \mathbb{P}\big(\text{tiempo de viaje} > 90 \ \text{min} \mid E = \text{bajo}\big) = 0.0131
+    \]}
+    {\footnotesize \[
+    \mathbb{P}\big(\text{tiempo de viaje} > 90 \ \text{min} \mid E = \text{alto}\big) = 0.0170
     \]}
 \end{enumerate}
 
-RESULTADOOOOOOOOOS
-
-
-
 \section{Conclusiones}
+A partir de los resultados obtenidos con la red bayesiana óptima, se pueden destacar los siguientes hallazgos:
+\begin{enumerate}
+    \item \textbf{Uso de transporte ferroviario en adultos.}  
+    La probabilidad de que un adulto utilice transporte ferroviario (metro, tren ligero o suburbano) es de apenas 8.68\%. Esto refleja que, aunque son medios importantes para la movilidad en la ZMVM, su peso relativo dentro de la distribución modal es reducido frente a otros medios de transporte.
 
-Estos hallazgos reflejan desigualdades en la movilidad urbana y proporcionan evidencia útil para el diseño de políticas públicas orientadas a mejorar el acceso y la eficiencia del transporte en la ZMVM. \\
-Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad.  diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad. Los resultados mostraron diferencias claras entre estratos y modos de transporte, confirmando que factores demográficos y socioeconómicos condicionan significativamente los patrones de movilidad.
+    \item \textbf{Diferencia entre semana y fin de semana en transporte privado.}  
+    El uso de transporte privado aumenta ligeramente en fines de semana (16.03\%) respecto a los días hábiles (14.22\%). Aunque la diferencia no es muy marcada, indica una mayor preferencia por automóvil y taxi privado en actividades no laborales, como ocio o visitas familiares.
+
+    \item \textbf{Uso del automóvil por hombres adultos en viajes laborales.}  
+    La probabilidad de que un hombre adulto utilice automóvil para motivos de trabajo es de 11.91\%. Este valor, relativamente bajo, confirma que gran parte de este grupo recurre al transporte público en sus desplazamientos cotidianos, posiblemente por factores como tráfico, costo de combustible o disponibilidad de estacionamiento.
+
+    \item \textbf{Duración de viajes según estrato socioeconómico.}  
+    Las probabilidades de realizar viajes largos (mayores a 90 minutos) son bajas en general, aunque ligeramente superiores en el estrato alto (1.70\%) en comparación con el estrato bajo (1.31\%). Esto sugiere que el estrato alto presenta mayor tolerancia a trayectos extensos, probablemente por disponer de transporte privado que facilita recorrer distancias más largas hacia zonas de trabajo, estudio o recreación.
+\end{enumerate}
+En síntesis, estos hallazgos cuantitativos refuerzan la idea de que la movilidad en la ZMVM está condicionada tanto por factores demográficos como socioeconómicos, evidenciando desigualdades en el acceso, uso y experiencia del transporte urbano.
 
 \section{Referencias}
 \begin{thebibliography}{9}
-
 \bibitem{inegi2017} % \cite{inegi2017}
 Instituto Nacional de Estadística y Geografía (INEGI),
 \textit{Encuesta Origen–Destino en Hogares de la Zona Metropolitana del Valle de México 2017},
 México, 2018.
 Disponible en: \url{https://www.inegi.org.mx/programas/eod/2017/}, consultado el 31 de agosto de 2025.
-
 \end{thebibliography}
 
 \end{document}
