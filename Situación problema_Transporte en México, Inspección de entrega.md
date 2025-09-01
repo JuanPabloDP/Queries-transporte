@@ -58,9 +58,9 @@
 
 -   [x] Redacten un artículo científico que incluya un abstract, introducción, descripción de los métodos que utilizaron, aplicación de los métodos al problema en cuestión, conclusiones y referencias.
 
-    -   [ ] **Falta**
+    -   [x] **Falta**
         -   [x] Conclusiones
-        -   [ ] desglozar metodología y aplicación
+        -   [x] desglozar metodología y aplicación
             -   [x] agreguen tablas
 
             -   [x]  actualizar gráficos
