@@ -60,7 +60,7 @@
 
     -   [ ] **Falta**
         -   [ ] Conclusiones
-        -   [ ] desglozar metodología y aplicación
+        -   [ ] desglozar metodología y aplicación 
             -   [ ] agreguen tablas
 
             -   [ ] actualizar gráficos
