@@ -1,29 +1,28 @@
-- [x] Construyan las variables que necesiten para dar respuesta a las queries asignadas. Si es necesario discreticen las variables continuas involucradas.
-	- [x] 1.- ¿Cuál es la probabilidad de que una persona **mayor de 18 años** use como medio de transporte el **tren**? 
-		- [x] edad *ttransporte*
-		- [x]  p5_14 *ttransporte*
-	- [x] 2.- ¿Cuál es la probabilidad de que se utilice **transporte privado** en un **día entre semana** en comparación con el fin de semana?
-		- [x] p5_3 *ttransporte*
-		- [x] p5_14 *ttransporte*
-		- [x] p2_1_1 *thogar* (se asume en p5_14)
-		- [x] p2_1_2 *thogar* (se asume en p5_14)
-		- [x] p2_1_3 *thogar*
-		==**Cambio:** se agregó la bicicleta==
-	- [x] 3.- ¿Cuál es la probabilidad de que un **hombre adulto use el automóvil por motivos de trabajo**? 
-		- [x] edad *ttransporte*
-		- [x] sexo *ttransporte*
-		- [x] p5_13 *tviaje* (propósito de viaje)
-		- [x] p5_14 *ttransporte* (tipo de transporte)
-	- [x] 4.-¿Quién es más probable que haga más de **1hr 30 min de su casa al trabajo**, una persona de **estatus sociodemográfico bajo** o una persona de estatus sociodemográfico alto?ly
-		- [x] estrato *ttransporte*
-		- [x] p5_13 *tviaje* (propósito de viaje)
-		- [x] p5_6 *tviaje* (origen)
-		- [x] p5_16_1_1 p5_16_1_2 *ttransporte* (divide horas y minutos en respectivas columnas, no son equivalentes)
-- [ ] Propongan al menos 3 diferentes DAGs que representen las relaciones de dependencia entre todas las variables de interés.
-- [ ] Construyan una red bayesiana utilizando las DAGs que propusieron previamente.
-- [ ] Discutan la significancia de las relaciones de dependencia de sus DAGs.
-- [ ] ¿Cuál es la red que mejor se ajuste a sus datos? ¿Por qué?
-- [x] Utilicen el algoritmo hill-climbing para obtener la mejor estructura de la DAG para estos datos.
-- [ ] Discutan la pertinencia de las relaciones de esta nueva DAG.
-- [x] Respondan las queries asignadas.
-- [ ] Redacten un artículo científico que incluya un abstract, introducción, descripción de los métodos que utilizaron, aplicación de los métodos al problema en cuestión, conclusiones y referencias.
+-   [x] Construyan las variables que necesiten para dar respuesta a las queries asignadas. Si es necesario discreticen las variables continuas involucradas.
+    -   [x] 1.- ¿Cuál es la probabilidad de que una persona **mayor de 18 años** use como medio de transporte el **tren**?
+        -   [x] edad *ttransporte*
+        -   [x] p5_14 *ttransporte*
+    -   [x] 2.- ¿Cuál es la probabilidad de que se utilice **transporte privado** en un **día entre semana** en comparación con el fin de semana?
+        -   [x] p5_3 *ttransporte*
+        -   [x] p5_14 *ttransporte*
+        -   [x] p2_1_1 *thogar* (se asume en p5_14)
+        -   [x] p2_1_2 *thogar* (se asume en p5_14)
+        -   [x] p2_1_3 *thogar* ==**Cambio:** se agregó la bicicleta==
+    -   [x] 3.- ¿Cuál es la probabilidad de que un **hombre adulto use el automóvil por motivos de trabajo**?
+        -   [x] edad *ttransporte*
+        -   [x] sexo *ttransporte*
+        -   [x] p5_13 *tviaje* (propósito de viaje)
+        -   [x] p5_14 *ttransporte* (tipo de transporte)
+    -   [x] 4.-¿Quién es más probable que haga más de **1hr 30 min de su casa al trabajo**, una persona de **estatus sociodemográfico bajo** o una persona de estatus sociodemográfico alto?ly
+        -   [x] estrato *ttransporte*
+        -   [x] p5_13 *tviaje* (propósito de viaje)
+        -   [x] p5_6 *tviaje* (origen)
+        -   [x] p5_16_1_1 p5_16_1_2 *ttransporte* (divide horas y minutos en respectivas columnas, no son equivalentes)
+-   [ ] Propongan al menos 3 diferentes DAGs que representen las relaciones de dependencia entre todas las variables de interés.
+-   [ ] Construyan una red bayesiana utilizando las DAGs que propusieron previamente.
+-   [ ] Discutan la significancia de las relaciones de dependencia de sus DAGs.
+-   [ ] ¿Cuál es la red que mejor se ajuste a sus datos? ¿Por qué?
+-   [x] Utilicen el algoritmo hill-climbing para obtener la mejor estructura de la DAG para estos datos.
+-   [ ] Discutan la pertinencia de las relaciones de esta nueva DAG.
+-   [x] Respondan las queries asignadas.
+-   [ ] Redacten un artículo científico que incluya un abstract, introducción, descripción de los métodos que utilizaron, aplicación de los métodos al problema en cuestión, conclusiones y referencias.
