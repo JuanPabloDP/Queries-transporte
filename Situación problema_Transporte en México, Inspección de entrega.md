@@ -30,25 +30,25 @@
 
             ==**Cambio:** se agregó propósito de viaje y origen==
 
--   [X ] Propongan al menos 3 diferentes DAGs que representen las relaciones de dependencia entre todas las variables de interés.
+-   [x] Propongan al menos 3 diferentes DAGs que representen las relaciones de dependencia entre todas las variables de interés.
 
     ==**Falta:** actualizar==
 
--   [ X] Construyan una red bayesiana utilizando las DAGs que propusieron previamente.
+-   [x] Construyan una red bayesiana utilizando las DAGs que propusieron previamente.
 
-    -   [ ] ==**Falta:** actualizar==
+    ==**Falta:** actualizar==
 
--   [ X] Discutan la significancia de las relaciones de dependencia de sus DAGs.
+-   [x] Discutan la significancia de las relaciones de dependencia de sus DAGs.
 
-    -   [ ] ==**Falta:** actualizar==
+    -   [x] ==**Falta:** actualizar==
 
--   [X ] ¿Cuál es la red que mejor se ajuste a sus datos? ¿Por qué?
+-   [x]  ¿Cuál es la red que mejor se ajuste a sus datos? ¿Por qué?
 
-    -   [ ] ==**Falta:** actualizar==
+    -   [x] ==**Falta:** actualizar==
 
 -   [x] Utilicen el algoritmo hill-climbing para obtener la mejor estructura de la DAG para estos datos.
 
--   [X] Discutan la pertinencia de las relaciones de esta nueva DAG.
+-   [x] Discutan la pertinencia de las relaciones de esta nueva DAG.
 
     ==**Falta:** actualizar==
 
@@ -56,15 +56,15 @@
 
     ==**Cambio:** se agregó bicicleta, origen y motivo==
 
--   [ ] Redacten un artículo científico que incluya un abstract, introducción, descripción de los métodos que utilizaron, aplicación de los métodos al problema en cuestión, conclusiones y referencias.
+-   [x] Redacten un artículo científico que incluya un abstract, introducción, descripción de los métodos que utilizaron, aplicación de los métodos al problema en cuestión, conclusiones y referencias.
 
     -   [ ] **Falta**
-        -   [ ] Conclusiones
-        -   [ ] desglozar metodología y aplicación 
-            -   [ ] agreguen tablas
+        -   [x] Conclusiones
+        -   [ ] desglozar metodología y aplicación
+            -   [x] agreguen tablas
 
-            -   [ X] actualizar gráficos
+            -   [x]  actualizar gráficos
 
-            -   [X ] incluir estadísticos del qmd
+            -   [x]  incluir estadísticos del qmd
         -   [x] Introduccion
         -   [x] Abstract
